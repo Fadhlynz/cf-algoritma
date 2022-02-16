@@ -6,6 +6,7 @@ use App\Http\Controllers\GejalaHamaController;
 use App\Http\Controllers\HamaController;
 use App\Http\Controllers\HasilHamaController;
 use App\Http\Controllers\KondisiHamaController;
+use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,6 +19,12 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+Route::get('/', function(){
+  return view('home');
+});
+
+Route::get('/login', [LoginController::class, 'index']);
 
 // Diagnosa Hama
 Route::get('/diagnosahama', [DiagnosahamaController::class, 'index']);
