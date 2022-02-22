@@ -48,7 +48,6 @@ class DiagnosahamaController extends Controller
           $argpkt[$rpkt['id']] = $rpkt['gambar'];
         }
 
-
         // Perhitungan Certainty Factor (CF)
         $sqlpenyakit = Hama::orderBy('id')->get();
         $arpenyakit = array();
