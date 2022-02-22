@@ -9,11 +9,11 @@ class HasilHama extends Model
 {
     use HasFactory;
 
-     protected $fillable = [
-        'tanggal',
-        'hama',
-        'gejala',
-        'hasil_id',
-        'hasil_nilai'
-    ];
+    //  protected $fillable = [
+    //     'tanggal',
+    //     'hama',
+    //     'gejala',
+    //     'hasil_id',
+    //     'hasil_nilai'
+    // ];
 }

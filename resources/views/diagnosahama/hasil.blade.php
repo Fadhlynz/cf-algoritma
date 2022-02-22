@@ -27,14 +27,66 @@
                         <thead>
                             <tr>
                                 <th>No.</th>
-                                <th>Kode Gejala</th>
-                                <th>Gejala</th>
-                                <th>Kondisi</th>
+                                <th>Kode</th>
+                                <th>Gejala Yang Dialami</th>
+                                <th>Pilihan</th>
                             </tr>
                         </thead>
+                        <tbody>
+                          <?php $tes = Session::get('tes'); ?>
+                          @foreach ($tes as $row)
+                          <tr>
+                            <td>{{ $row->nama_gejala}}</td>
+                          </tr>
+                          @endforeach 
+                        </tbody>
                     </table>
             </div>
         </div>
+ 
+          <div class="card p-3">
+              <div class="container">
+                <div class="row">
+                <div class="col-8">
+                  <h5>Hasil Diagnosa</h5>
+                  <p>Jenis Penyakit yang diderita adalah</p>
+                  <h4>Jenis Penyakit</h4>
+                </div>
+                <div class="col-4">
+                  <img src="" alt="">
+                </div>
+              </div>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-header">
+                Detail
+              </div>
+              <div class="card-body">
+                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+              </div>
+            </div>
+           
+            <div class="card">
+              <div class="card-header">
+                Saran
+              </div>
+              <div class="card-body">
+                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+              </div>
+            </div>
+           
+            <div class="card">
+              <div class="card-header">
+                Kemungkinan Lain
+              </div>
+              <div class="card-body">
+                <div class="d-flex">
+                  <i class="bi bi-play-btn mr-3"></i><p>With supporting text below as a natural lead-in to additional content.</p>
+                </div>
+              </div>
+            </div>
 
     </section>
         

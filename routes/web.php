@@ -7,6 +7,7 @@ use App\Http\Controllers\HamaController;
 use App\Http\Controllers\HasilHamaController;
 use App\Http\Controllers\KondisiHamaController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\RiwayatController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -30,6 +31,8 @@ Route::get('/login', [LoginController::class, 'index']);
 Route::get('/diagnosahama', [DiagnosahamaController::class, 'index']);
 Route::post('/diagnosahama', [DiagnosahamaController::class, 'store']);
 Route::get('/hasilhama', [HasilHamaController::class, 'index']);
+Route::get('/riwayathama', [RiwayatController::class, 'index']);
+Route::delete('/riwayathama/{riwayathama}', [RiwayatController::class, 'destroy']);
 
 // Hama
 Route::get('/hama', [HamaController::class, 'index']);

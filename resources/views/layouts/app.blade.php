@@ -89,7 +89,7 @@
                         <a href="{{url('/diagnosahama')}}">Diagnosa</a>
                     </li>
                     <li class="submenu-item ">
-                        <a href="{{url('/diagnosahama')}}">Riwayat</a>
+                        <a href="{{url('/riwayathama')}}">Riwayat</a>
                     </li>
                 </ul>
             </li>

@@ -48,7 +48,7 @@
                         <tr>
                             <td>{{ $loop->iteration }}</td>
                             <td>G00{{ $loop->iteration }}</td>
-                            <td>{{$row->nama_gejala}}</td>
+                            <td>{{$row->nama_gejala}}</td> 
                             <td>
                                 <select class="form-control" name="kondisihama[]">
                                     <option value="">Silahkan Pilih</option>
