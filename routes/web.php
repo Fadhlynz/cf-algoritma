@@ -31,9 +31,13 @@ Route::get('/login', [LoginController::class, 'index']);
 Route::get('/diagnosahama', [DiagnosahamaController::class, 'index']);
 Route::post('/diagnosahama', [DiagnosahamaController::class, 'store']);
 Route::get('/hasilhama', [HasilHamaController::class, 'index']);
+//Riwayat Hama
 Route::get('/riwayathama', [RiwayatController::class, 'index']);
+Route::get('/riwayathama/create', [RiwayatController::class, 'create']);
+Route::post('/riwayathama', [RiwayatController::class, 'store']);
+Route::get('/riwayathama/{riwayathama}/edit', [RiwayatController::class, 'edit']);
 Route::delete('/riwayathama/{riwayathama}', [RiwayatController::class, 'destroy']);
-
+Route::patch('/riwayathama/{riwayathama}', [RiwayatController::class, 'update']);
 // Hama
 Route::get('/hama', [HamaController::class, 'index']);
 Route::get('/hama/create', [HamaController::class, 'create']);

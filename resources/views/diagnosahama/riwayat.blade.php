@@ -50,8 +50,8 @@
                                 <td>{{ $row->hasil_nilai }}</td>
                                 <td>
                                   <a href="/riwayat-detail/{{ $row->id }}" class="btn btn-sm btn-secondary"><i class="fas fa-eye"></i> Detail</a>
-                                  <form action="/riwayathama/{{ $row->id }}" method="post" class="d-inline">
-                                      @method('delete')
+                                  <form action="/riwayathama/{{ $row->hasil_nilai }}" method="post" class="d-inline">
+                                      @method('delete') 
                                       @csrf
                                       <button type="submit" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></button>
                                   </form>

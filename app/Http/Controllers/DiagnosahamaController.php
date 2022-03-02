@@ -21,11 +21,11 @@ class DiagnosahamaController extends Controller
     public function store(Request $request)
     {
         // Get Data dari Request
-        $kondisihama = array_filter($request->kondisihama);
+        $kondisihama = $request->kondisihama;
 
         $inptanggal = date('Y-m-d H:i:s');
 
-        $arbobot = array('0', '1', '0.8', '0.6', '0.4', '-0.2', '-0.4', '-0.6', '-0.8', '-1');
+        $arbobot = array('0', '1', '0.8', '0.6', '0.4', '0.2', '0');
         $argejala = array();
 
         for ($i = 0; $i < count($kondisihama); $i++) {
@@ -59,20 +59,13 @@ class DiagnosahamaController extends Controller
           foreach($sqlgejala as $rgejala){
             $arkondisi = explode("_", $kondisihama[0]);
             $gejala = $arkondisi[0];
-
             for ($i = 0; $i < count($kondisihama); $i++) { 
                   $arkondisi=explode("_", $kondisihama[$i]); 
                   $gejala=$arkondisi[0]; 
                   if($rgejala['id']==$gejala) { 
-                      $cf=($rgejala['mb'] - $rgejala['md']) * $arbobot[$arkondisi[1]]; 
+                    $cf=($rgejala['mb'] - $rgejala['md']) * $arbobot[$arkondisi[1]]; 
                       if (($cf>= 0)&& ($cf * $cflama >= 0)) {
                           $cflama = $cflama + ($cf * (1 - $cflama));
-                      }
-                      if ($cf * $cflama < 0) { 
-                          $cflama=($cflama + $cf) / (1 - Math . Min(Math . abs($cflama), Math . abs($cf))); 
-                      } 
-                      if(($cf < 0) && ($cf * $cflama>= 0)) {
-                          $cflama = $cflama + ($cf * (1 + $cflama));
                       }
                   }
             }
@@ -80,13 +73,13 @@ class DiagnosahamaController extends Controller
           if ($cflama > 0) {
           $arpenyakit += array($rpenyakit['id'] => number_format($cflama, 4));
           }
-
         }
 
         arsort($arpenyakit);
 
         $inpgejala = serialize($argejala);
         $inppenyakit = serialize($arpenyakit);
+
         
         $np1 = 0;
         foreach ($arpenyakit as $key1 => $value1) {
@@ -106,6 +99,7 @@ class DiagnosahamaController extends Controller
         // // Save Data
         // $hasilhama->save();
 
+        // Get Data Dari Pilihan Gejala
         $ig = 0;
         foreach($argejala as $key => $value){
           $kondis = $value;
@@ -114,12 +108,25 @@ class DiagnosahamaController extends Controller
           $sqlgjl = GejalaHama::where('id', '=', $key)->get();
           foreach($sqlgjl as $gjl){
             $gjl['id'];
+            $gjl['nama_gejala'];
+            $datakondisi = $arkondisitext[$kondis];
           }
-          // dd($gjl['nama_hg']);
         }
-        return redirect('/hasilhama')->with([
 
-          'tes' => $sqlgjl
-        ]);
+
+        // Get Jenis Penyakit dan Gambar
+         $np = 0;
+         foreach ($arpenyakit as $key => $value) {
+          $np++;
+          $idpkt[$np] = $key;
+          $nmpkt[$np] = $arpkt[$key];
+          $vlpkt[$np] = $value;
+         }
+
+        // Get Kemungkinan Lain
+        for ($ipl = 2; $ipl < count($idpkt); $ipl++) { 
+            $coba = $nmpkt[$ipl];
+        }
+        return view('diagnosahama.hasil', compact('argejala', 'sqlgjl', 'datakondisi', 'arpenyakit', 'nmpkt', 'vlpkt', 'ardpkt','arspkt','idpkt','argpkt'));
     }
 }

@@ -51,7 +51,7 @@
                             <td>{{$row->nama_gejala}}</td> 
                             <td>
                                 <select class="form-control" name="kondisihama[]">
-                                    <option value="">Silahkan Pilih</option>
+                                    <option value="0">Silahkan Pilih</option>
                                     @foreach($kondisihama as $kond)
                                         <option data-id="{{$kond->id}}" value="{{$row->id}}_{{$kond->id}}">{{$kond->kondisi}}</option>
                                     @endforeach
