@@ -22,8 +22,10 @@
             <div class="col">
                 <div class="alert alert-success alert-dismissible show fade">
                     <i class="bi bi-exclamation-triangle-fill"></i> Perhatian ! <br>
-                        Silahkan memilih gejala sesuai dengan kondisi ayam anda, anda dapat memilih kepastian kondisi ayam dari pasti tidak sampai pasti ya,jika sudah tekan tombol ( <i class="fas fa-search-plus"></i>) di bawah untuk melihat hasil.
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    Silahkan memilih gejala sesuai dengan kondisi ayam anda, anda dapat memilih kepastian kondisi ayam dari
+                    pasti tidak sampai pasti ya,jika sudah tekan tombol ( <i class="fas fa-search-plus"></i>) di bawah untuk
+                    melihat hasil.
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
             </div>
         </div>
@@ -44,31 +46,32 @@
                             </tr>
                         </thead>
                         <tbody>
-                        @foreach($gejalahamas as $row)
-                        <tr>
-                            <td>{{ $loop->iteration }}</td>
-                            <td>G00{{ $loop->iteration }}</td>
-                            <td>{{$row->nama_gejala}}</td> 
-                            <td>
-                                <select class="form-control" name="kondisihama[]">
-                                    <option value="0">Silahkan Pilih</option>
-                                    @foreach($kondisihama as $kond)
-                                        <option data-id="{{$kond->id}}" value="{{$row->id}}_{{$kond->id}}">{{$kond->kondisi}}</option>
-                                    @endforeach
-                                </select>
-                            </td>
-
-                        </tr>
-                        @endforeach
+                            @foreach ($gejalahamas as $row)
+                                <tr>
+                                    <td>{{ $loop->iteration }}</td>
+                                    <td>G00{{ $loop->iteration }}</td>
+                                    <td>{{ $row->nama_gejala }}</td>
+                                    <td>
+                                        <select class="form-control" name="kondisihama[]">
+                                            <option value="0">Silahkan Pilih</option>
+                                            @foreach ($kondisihama as $kond)
+                                                <option data-id="{{ $kond->id }}"
+                                                    value="{{ $row->id }}_{{ $kond->id }}">{{ $kond->kondisi }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                    </td>
+                                </tr>
+                            @endforeach
                         </tbody>
-                            <button type="submit" name="tambah" class="float">
-                                <i class="fa fa-search-plus my-float"></i>
-                            </button>
+                        <button type="submit" name="tambah" class="float">
+                            <i class="fa fa-search-plus my-float"></i>
+                        </button>
                     </table>
                 </form>
             </div>
         </div>
 
     </section>
-        
+
 @endsection

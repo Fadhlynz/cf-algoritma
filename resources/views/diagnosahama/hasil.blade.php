@@ -36,7 +36,7 @@
                           @foreach($argejala as $key)
                           <tr>
                               <td>{{$loop->iteration}}</td>
-                                @foreach ($sqlgjl as $row)
+                              @foreach ($sqlgjl as $row)
                                   <td>G00{{ $row->id}}</td>
                                   <td>{{ $row->nama_gejala}}</td>
                                   <td>{{ $datakondisi }}</td>
@@ -47,7 +47,7 @@
                     </table>
             </div>
         </div>
- 
+
           <div class="card p-3">
               <div class="container">
                 <div class="row">
@@ -73,7 +73,7 @@
                 <p class="card-text">{{ $ardpkt[$idpkt[1]] }}</p>
               </div>
             </div>
-           
+            
             <div class="card">
               <div class="card-header">
                 Saran
@@ -82,7 +82,7 @@
                 <p class="card-text">{{ $arspkt[$idpkt[1]] }}</p>
               </div>
             </div>
-           
+            
             <div class="card">
               <div class="card-header">
                 Kemungkinan Lain
@@ -93,7 +93,6 @@
                 </div>
               </div>
             </div>
-
     </section>
         
 @endsection

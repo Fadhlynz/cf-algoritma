@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\BasisHama;
 use App\Models\GejalaHama;
 use App\Models\Hama;
-use App\Models\HasilHama;
+// use App\Models\HasilHama;
 use App\Models\KondisiHama;
 use Illuminate\Http\Request;
 
@@ -16,6 +16,11 @@ class DiagnosahamaController extends Controller
         $gejalahamas = GejalaHama::all();
         $kondisihama = KondisiHama::all();
         return view('diagnosahama.index', compact('gejalahamas','kondisihama'));
+    }
+
+    private function hitung()
+    {
+      
     }
 
     public function store(Request $request)
@@ -75,6 +80,7 @@ class DiagnosahamaController extends Controller
           }
         }
 
+
         arsort($arpenyakit);
 
         $inpgejala = serialize($argejala);
@@ -101,32 +107,31 @@ class DiagnosahamaController extends Controller
 
         // Get Data Dari Pilihan Gejala
         $ig = 0;
-        foreach($argejala as $key => $value){
-          $kondis = $value;
+        foreach($argejala as $key2 => $value2){
           $ig++;
-          $gejala = $key;
-          $sqlgjl = GejalaHama::where('id', '=', $key)->get();
+          $kond[$ig] = $key2;
+          $gejala[$ig] = $value2;
+          $sqlgjl = GejalaHama::where('id', $gejala[$ig])->get();
           foreach($sqlgjl as $gjl){
-            $gjl['id'];
-            $gjl['nama_gejala'];
-            $datakondisi = $arkondisitext[$kondis];
+            $tes = $gjl['nama_gejala'];
+            $datakondisi = $arkondisitext[$kond];
           }
         }
-
+      
 
         // Get Jenis Penyakit dan Gambar
-         $np = 0;
-         foreach ($arpenyakit as $key => $value) {
+        $np = 0;
+        foreach ($arpenyakit as $key => $value) {
           $np++;
           $idpkt[$np] = $key;
           $nmpkt[$np] = $arpkt[$key];
           $vlpkt[$np] = $value;
-         }
+        }
 
         // Get Kemungkinan Lain
-        for ($ipl = 2; $ipl < count($idpkt); $ipl++) { 
-            $coba = $nmpkt[$ipl];
-        }
-        return view('diagnosahama.hasil', compact('argejala', 'sqlgjl', 'datakondisi', 'arpenyakit', 'nmpkt', 'vlpkt', 'ardpkt','arspkt','idpkt','argpkt'));
+        // for ($ipl = 2; $ipl < count($idpkt); $ipl++) { 
+        //     $coba = $nmpkt[$ipl];
+        // }
+        return view('diagnosahama.hasil', compact('argejala', 'sqlgjl', 'datakondisi', 'arpenyakit', 'nmpkt', 'vlpkt', 'ardpkt','arspkt','idpkt','argpkt','ig'));
     }
 }
