@@ -18,11 +18,6 @@ class DiagnosahamaController extends Controller
         return view('diagnosahama.index', compact('gejalahamas','kondisihama'));
     }
 
-    private function hitung()
-    {
-      
-    }
-
     public function store(Request $request)
     {
         // Get Data dari Request
@@ -55,6 +50,7 @@ class DiagnosahamaController extends Controller
 
         // Perhitungan Certainty Factor (CF)
         $sqlpenyakit = Hama::orderBy('id')->get();
+        $tes = array();
         $arpenyakit = array();
         foreach($sqlpenyakit as $rpenyakit){
           $cftotal_temp = 0;
@@ -69,23 +65,25 @@ class DiagnosahamaController extends Controller
                   $gejala=$arkondisi[0]; 
                   if($rgejala['id']==$gejala) { 
                     $cf=($rgejala['mb'] - $rgejala['md']) * $arbobot[$arkondisi[1]]; 
-                      if (($cf>= 0)&& ($cf * $cflama >= 0)) {
-                          $cflama = $cflama + ($cf * (1 - $cflama));
-                      }
+                    if (($cf>= 0)&& ($cf * $cflama >= 0)) {
+                      $cflama = $cflama + $cf;
+                    }
                   }
+                }
+              }
+              if ($cflama > 0) {
+                $arpenyakit += array($rpenyakit['id'] => number_format($cf, 4));
+              }
             }
-          }
-          if ($cflama > 0) {
-          $arpenyakit += array($rpenyakit['id'] => number_format($cflama, 4));
-          }
-        }
-
-
+            
+            
+        dd($arpenyakit);
         arsort($arpenyakit);
-
+        die;
+        
         $inpgejala = serialize($argejala);
         $inppenyakit = serialize($arpenyakit);
-
+        
         
         $np1 = 0;
         foreach ($arpenyakit as $key1 => $value1) {
@@ -93,7 +91,6 @@ class DiagnosahamaController extends Controller
           $idpkt1[$np1] = $key1;
           $vlpkt1[$np1] = $value1;
         }
-
         // Get Data
         // $hasilhama = new HasilHama();
         // $hasilhama->tanggal = $inptanggal;
@@ -109,16 +106,15 @@ class DiagnosahamaController extends Controller
         $ig = 0;
         foreach($argejala as $key2 => $value2){
           $ig++;
-          $kond[$ig] = $key2;
-          $gejala[$ig] = $value2;
-          $sqlgjl = GejalaHama::where('id', $gejala[$ig])->get();
+          $kond = $key2;
+          $gejala = $value2;
+          $sqlgjl = GejalaHama::where('id', $value2)->get();
           foreach($sqlgjl as $gjl){
             $tes = $gjl['nama_gejala'];
             $datakondisi = $arkondisitext[$kond];
           }
         }
-      
-
+    
         // Get Jenis Penyakit dan Gambar
         $np = 0;
         foreach ($arpenyakit as $key => $value) {
